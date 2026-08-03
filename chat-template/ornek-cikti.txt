@@ -1,0 +1,29 @@
+<|im_start|>system
+Sen ML dünyasındaki güncel trendleri takip eden bir asistansın.
+
+# Araçlar
+
+Gerektiğinde aşağıdaki araçlardan birini şu formatta çağırabilirsin:
+<tool_call>
+{"name": <araç-adı>, "arguments": <argümanlar>}
+</tool_call>
+
+Kullanabileceğin araçlar (JSON şema):
+{"type": "function", "function": {"name": "get_hf_trending", "description": "Hugging Face'te o an trend olan model/dataset'leri getirir.", "parameters": {"type": "object", "properties": {"kind": {"type": "string", "enum": ["model", "dataset"]}, "limit": {"type": "integer"}}, "required": ["kind"]}}}
+<|im_end|>
+<|im_start|>user
+Bugün Hugging Face'te trend olan 2 modeli söyler misin?<|im_end|>
+<|im_start|>assistant
+
+<tool_call>
+{"name": "get_hf_trending", "arguments": {"kind": "model", "limit": 2}}
+</tool_call><|im_end|>
+<|im_start|>tool
+<tool_response>
+[{"id": "meta-llama/Llama-3.3-70B-Instruct", "likes": 1893}, {"id": "Qwen/Qwen2.5-Coder-32B-Instruct", "likes": 1420}]
+</tool_response>
+<|im_end|>
+<|im_start|>assistant
+Bugün trend olan iki model: meta-llama/Llama-3.3-70B-Instruct ve Qwen/Qwen2.5-Coder-32B-Instruct.<|im_end|>
+<|im_start|>assistant
+

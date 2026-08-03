@@ -1,0 +1,55 @@
+{#-
+  Basit ChatML tarzı sohbet şablonu.
+  Roller: system / user / assistant / tool
+  Ek olarak tool-calling (function calling) destekler:
+    - Araç tanımları (tools) system mesajının içine sarmalanır.
+    - Asistanın araç çağrısı  <tool_call>...</tool_call> bloğuna,
+    - Aracın dönen sonucu ise <tool_response>...</tool_response> bloğuna gider.
+  Kullanım (transformers):
+    tok.chat_template = open("chat_template.jinja").read()
+    tok.apply_chat_template(messages, tools=..., add_generation_prompt=True, tokenize=False)
+-#}
+{%- if tools %}
+    {{- '<|im_start|>system\n' }}
+    {%- if messages[0]['role'] == 'system' %}
+        {{- messages[0]['content'] + '\n\n' }}
+    {%- else %}
+        {{- 'Sen yardımcı bir asistansın.\n\n' }}
+    {%- endif %}
+    {{- '# Araçlar\n\n' }}
+    {{- 'Gerektiğinde aşağıdaki araçlardan birini şu formatta çağırabilirsin:\n' }}
+    {{- '<tool_call>\n{"name": <araç-adı>, "arguments": <argümanlar>}\n</tool_call>\n\n' }}
+    {{- 'Kullanabileceğin araçlar (JSON şema):\n' }}
+    {%- for tool in tools %}
+        {{- tool | tojson }}
+        {{- '\n' }}
+    {%- endfor %}
+    {{- '<|im_end|>\n' }}
+{%- else %}
+    {%- if messages[0]['role'] == 'system' %}
+        {{- '<|im_start|>system\n' + messages[0]['content'] + '<|im_end|>\n' }}
+    {%- endif %}
+{%- endif %}
+{%- for message in messages %}
+    {%- if message['role'] == 'system' %}
+        {#- ilk system mesajı yukarıda zaten işlendi, burada atlıyoruz -#}
+    {%- elif message['role'] == 'user' %}
+        {{- '<|im_start|>user\n' + message['content'] + '<|im_end|>\n' }}
+    {%- elif message['role'] == 'assistant' %}
+        {{- '<|im_start|>assistant\n' }}
+        {%- if message['content'] %}
+            {{- message['content'] }}
+        {%- endif %}
+        {%- if message['tool_calls'] %}
+            {%- for tc in message['tool_calls'] %}
+                {{- '\n<tool_call>\n{"name": "' + tc['function']['name'] + '", "arguments": ' + (tc['function']['arguments'] | tojson) + '}\n</tool_call>' }}
+            {%- endfor %}
+        {%- endif %}
+        {{- '<|im_end|>\n' }}
+    {%- elif message['role'] == 'tool' %}
+        {{- '<|im_start|>tool\n<tool_response>\n' + message['content'] + '\n</tool_response>\n<|im_end|>\n' }}
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|im_start|>assistant\n' }}
+{%- endif %}
