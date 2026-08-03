@@ -96,17 +96,23 @@ export HF_TOKEN=hf_xxx            # kendi token'ınız
 python app.py                    # http://127.0.0.1:7860
 ```
 
-## Hugging Face Space (canlı demo)
+## Canlı Demo & Deploy
 
-🔗 **Demo linki:** _(Space oluşturulunca buraya eklenecek)_
+- 🖥️ **Tanıtım (HF Static Space):** https://huggingface.co/spaces/ssilistre/ml-trend-radar
+- ▶️ **Canlı uygulama (Render):** https://ml-trend-radar.onrender.com
 
-Kurulum:
-1. Yeni bir **Gradio** Space aç.
-2. `app.py`, `tools.py`, `db.py`, `requirements.txt`, `README.md` dosyalarını yükle.
-3. **Settings → Variables and secrets**:
-   - `HF_TOKEN` → huggingface.co/settings/tokens (Inference Providers erişimli token)
-   - *(opsiyonel)* `GITHUB_TOKEN`, `MODEL`
-4. Space otomatik build olur.
+> Neden Render? Free Hugging Face hesabı artık **Gradio** Space için PRO
+> istiyor (yalnızca Static Space ücretsiz). Uygulama gerçek bir sunucu
+> gerektirdiğinden (API çağrıları + SQLite + gizli `HF_TOKEN`) dinamik kısmı
+> Render free tier'da host edilir; HF'deki Static Space oraya yönlendirir.
+
+**Render'a deploy (tek tık):** repodaki `render.yaml` blueprint ile
+[Deploy to Render](https://render.com/deploy?repo=https://github.com/unkownpr/4hafta-odev).
+Render, `HF_TOKEN` değerini deploy sırasında sorar (opsiyonel `GITHUB_TOKEN`).
+
+> PRO hesabın varsa `app.py, tools.py, db.py, requirements.txt` dosyalarını
+> doğrudan bir **Gradio** HF Space'e yükleyip `HF_TOKEN` secret'ı eklemen de
+> yeterli.
 
 ## Notlar
 
