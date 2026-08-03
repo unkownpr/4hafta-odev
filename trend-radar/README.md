@@ -98,21 +98,18 @@ python app.py                    # http://127.0.0.1:7860
 
 ## Canlı Demo & Deploy
 
-- 🖥️ **Tanıtım (HF Static Space):** https://huggingface.co/spaces/ssilistre/ml-trend-radar
-- ▶️ **Canlı uygulama (Render):** https://ml-trend-radar.onrender.com
+- 🖥️ **HF Space (tanıtım sayfası):** https://huggingface.co/spaces/ssilistre/ml-trend-radar
 
-> Neden Render? Free Hugging Face hesabı artık **Gradio** Space için PRO
-> istiyor (yalnızca Static Space ücretsiz). Uygulama gerçek bir sunucu
-> gerektirdiğinden (API çağrıları + SQLite + gizli `HF_TOKEN`) dinamik kısmı
-> Render free tier'da host edilir; HF'deki Static Space oraya yönlendirir.
+Free Hugging Face hesabı **Gradio** Space için artık PRO istiyor (yalnızca
+Static Space ücretsiz). Uygulama gerçek sunucu gerektirdiğinden (API çağrıları
++ SQLite + gizli `HF_TOKEN`) çalışan arayüzü iki şekilde koşabilirsin:
 
-**Render'a deploy (tek tık):** repodaki `render.yaml` blueprint ile
-[Deploy to Render](https://render.com/deploy?repo=https://github.com/unkownpr/4hafta-odev).
-Render, `HF_TOKEN` değerini deploy sırasında sorar (opsiyonel `GITHUB_TOKEN`).
-
-> PRO hesabın varsa `app.py, tools.py, db.py, requirements.txt` dosyalarını
-> doğrudan bir **Gradio** HF Space'e yükleyip `HF_TOKEN` secret'ı eklemen de
-> yeterli.
+- **Yerel (önerilen):** aşağıdaki *Yerel Çalıştırma* adımları — `python app.py`.
+- **Tek tık bulut (opsiyonel):** repodaki `render.yaml` ile
+  [Deploy to Render](https://render.com/deploy?repo=https://github.com/unkownpr/4hafta-odev);
+  Render `HF_TOKEN`'ı deploy sırasında sorar.
+- **PRO hesabın varsa:** `app.py, tools.py, db.py, requirements.txt` dosyalarını
+  doğrudan bir Gradio HF Space'e yükleyip `HF_TOKEN` secret'ı ekle.
 
 ## Notlar
 
