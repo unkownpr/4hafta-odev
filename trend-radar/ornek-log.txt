@@ -1,0 +1,16 @@
+[Turn 1] Araç Çağrısı:
+   -> get_hf_trending(kind='model', sort='trending', limit=3)
+   <- {"kind": "model", "sort": "trending", "count": 3, "results": [{"id": "moonshotai/Kimi-K3", "downloads": 967622, "likes": 9739, "url": "https://huggingface.co/moonshotai/Kimi-K3"}, {"id": "deepseek-ai/DeepSeek-V4-Flash-0731", "downloads": 236076, "likes": 1902, "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"}, {"id": "MiniMaxAI/MiniMax-H3", "downloads": 0, "likes": 805, "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3"}]}
+
+[Turn 2] Araç Çağrısı:
+   -> get_github_trending(query='llm', since='2025-07-01', until='2025-07-31', limit=3)
+   <- {"query": "created:2025-07-01..2025-07-31 llm", "count": 3, "results": [{"name": "NousResearch/hermes-agent", "stars": 224568, "language": "Python", "description": "The agent that grows with you", "url": "https://github.com/NousResearch/hermes-agent"}, {"name": "google/langextract", "stars": 37953, "language": "Python", "description": "A Python library for extracting structured information from unstructured text using LLMs with precise source grounding and interactive visualization.", "url": "ht
+
+[Turn 3] Araç Çağrısı:
+   -> save_repo(name='moonshotai/Kimi-K3', url='https://huggingface.co/moonshotai/Kimi-K3', source='hf', note='denenecek')
+   <- {"saved": true, "id": 1, "name": "moonshotai/Kimi-K3"}
+
+[Turn 4] Araç Çağrısı:
+   -> list_saved()
+   <- {"count": 1, "results": [{"id": 1, "name": "moonshotai/Kimi-K3", "url": "https://huggingface.co/moonshotai/Kimi-K3", "source": "hf", "note": "denenecek", "added_at": "2026-08-03 12:14:36"}]}
+

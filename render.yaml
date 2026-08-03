@@ -1,0 +1,15 @@
+# Render.com Blueprint — trend-radar Gradio uygulamasını free web service olarak yayınlar.
+# "Deploy to Render" ile tek tıkta kurulur; HF_TOKEN'ı Render sorar (sync: false).
+services:
+  - type: web
+    name: ml-trend-radar
+    runtime: python
+    plan: free
+    rootDir: trend-radar
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: HF_TOKEN
+        sync: false
+      # - key: GITHUB_TOKEN   # opsiyonel, GitHub rate-limit'i yükseltir
+      #   sync: false
